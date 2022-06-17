@@ -1,38 +1,25 @@
 package be.codesquad.issuetracker.oauth;
 
-import be.codesquad.issuetracker.oauth.dto.GithubToken;
-import java.util.HashMap;
-import java.util.Map;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
+import be.codesquad.issuetracker.user.User;
+import be.codesquad.issuetracker.user.UserRepository;
+import java.util.NoSuchElementException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class LoginService {
 
-    private String url = "https://github.com/login/oauth/access_token";
-    private String clientId = "ff50ff7342e90de02060";
-    private String clientSecret = "deaf964bb0ece843b7703b980ca9a7019874fe38";
+    private final UserRepository userRepository;
 
-    public GithubToken getAccessToken(String code) {
-        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-        Map<String, String> header = new HashMap<>();
-        header.put("Accept", "application/json");
-        headers.setAll(header);
+    @Transactional
+    public User upsertUser(User user) {
+        User findUser = userRepository.findByAuthId(user.getAuthId())
+            .orElseThrow(() -> new NoSuchElementException("유효하지 않은 사용자입니다."));
 
-        MultiValueMap<String, String> requestPayloads = new LinkedMultiValueMap<>();
-        Map<String, String> requestPayload = new HashMap<>();
-        requestPayload.put("client_id", clientId);
-        requestPayload.put("client_secret", clientSecret);
-        requestPayload.put("code", code);
-        requestPayloads.setAll(requestPayload);
-
-        HttpEntity<?> request = new HttpEntity<>(requestPayloads, headers);
-        ResponseEntity<?> response = new RestTemplate().postForEntity(
-            url, request, GithubToken.class);
-        return (GithubToken) response.getBody();
+        findUser.update(user);
+        userRepository.save(findUser);
+        return user;
     }
 }
