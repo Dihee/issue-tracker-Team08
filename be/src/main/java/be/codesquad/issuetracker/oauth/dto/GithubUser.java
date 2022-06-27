@@ -1,9 +1,12 @@
 package be.codesquad.issuetracker.oauth.dto;
 
+import be.codesquad.issuetracker.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class GithubUser {
 
     @JsonProperty("node_id")
@@ -14,4 +17,8 @@ public class GithubUser {
 
     @JsonProperty("avatar_url")
     private String imageUrl;
+
+    public User toEntity() {
+        return new User(authId, username, imageUrl);
+    }
 }
