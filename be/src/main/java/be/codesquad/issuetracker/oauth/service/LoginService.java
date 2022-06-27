@@ -21,7 +21,7 @@ public class LoginService {
     public User upsertUser(GithubUser githubUser) {
         User user = githubUser.toEntity();
         User findUser = userRepository.findByAuthId(user.getAuthId())
-            .map(u -> u.update(user))
+            .map(foundUser -> foundUser.update(user))
             .orElse(user);
         return userRepository.save(findUser);
     }
