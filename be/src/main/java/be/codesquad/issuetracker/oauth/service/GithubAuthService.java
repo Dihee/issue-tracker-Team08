@@ -12,14 +12,14 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
-public class AuthService {
+public class GithubAuthService {
 
     private final String authPath;
     private final String resourcePath;
     private final String clientId;
     private final String clientSecret;
 
-    public AuthService(
+    public GithubAuthService(
         @Value("${oauth.github.auth-path}") String authPath,
         @Value("${oauth.github.resource-path}") String resourcePath,
         @Value("${oauth.github.client-id}") String clientId,

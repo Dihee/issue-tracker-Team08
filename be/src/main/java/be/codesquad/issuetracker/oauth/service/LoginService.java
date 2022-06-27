@@ -19,14 +19,14 @@ public class LoginService {
 
     @Transactional
     public User upsertUser(GithubUser githubUser) {
-        User user = User.of(githubUser);
-        User findUser = userRepository.findByAuthId(user.getAuthId()).orElseGet(() ->
-            userRepository.save(user));
-        findUser.update(user);
-        return findUser;
+        User user = githubUser.toEntity();
+        User findUser = userRepository.findByAuthId(user.getAuthId())
+            .map(u -> u.update(user))
+            .orElse(user);
+        return userRepository.save(findUser);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public String getJwtToken(GithubUser githubUser) {
         User user = upsertUser(githubUser);
         return JwtFactory.create(user, EXPIRED_SECOND);

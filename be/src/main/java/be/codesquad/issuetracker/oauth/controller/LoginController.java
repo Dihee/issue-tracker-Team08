@@ -2,7 +2,7 @@ package be.codesquad.issuetracker.oauth.controller;
 
 import be.codesquad.issuetracker.oauth.controller.dto.AuthLoginDto;
 import be.codesquad.issuetracker.oauth.dto.GithubUser;
-import be.codesquad.issuetracker.oauth.service.AuthService;
+import be.codesquad.issuetracker.oauth.service.GithubAuthService;
 import be.codesquad.issuetracker.oauth.service.LoginService;
 import java.net.URI;
 import lombok.extern.slf4j.Slf4j;
@@ -24,13 +24,13 @@ public class LoginController {
     private final String clientId;
     private final String redirectUri;
     private final LoginService loginService;
-    private final AuthService authService;
+    private final GithubAuthService authService;
 
     public LoginController(
         @Value("${oauth.github.client-id}") String clientId,
         @Value("${oauth.github.redirect-uri}")String redirectUri,
         LoginService loginService,
-        AuthService authService) {
+        GithubAuthService authService) {
         this.clientId = clientId;
         this.redirectUri = redirectUri;
         this.loginService = loginService;
@@ -38,7 +38,7 @@ public class LoginController {
     }
 
     @GetMapping
-    public ResponseEntity<Void> login() {
+    public ResponseEntity<Void> githubLogin() {
         URI location = UriComponentsBuilder
             .fromPath(redirectUri)
             .queryParam("client_id", clientId)
