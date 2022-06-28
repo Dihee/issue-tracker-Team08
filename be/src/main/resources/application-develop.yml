@@ -16,3 +16,4 @@ spring:
 logging:
   level:
     be.codesquad.issuetracker: debug
+    org.hibernate.SQL: debug

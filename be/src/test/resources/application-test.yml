@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/issuetracker
+    username: donggi
+    password: '0614'
+  profiles:
+    active: ${profile}
+
+oauth:
+  github:
+    client-id: ${CLIENT_ID}
+    client-secret: ${CLIENT_SECRET}
+    auth-path: https://github.com/login/oauth/access_token
+    resource-path: https://api.github.com/user
+    redirect-uri: https://github.com/login/oauth/authorize
