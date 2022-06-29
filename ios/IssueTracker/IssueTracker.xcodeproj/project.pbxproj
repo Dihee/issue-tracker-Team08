@@ -354,7 +354,10 @@
 				73888533286836DB00F65BEF /* IssueListCell.swift */,
 				73888532286836DB00F65BEF /* IssueViewController.swift */,
 				73CF7C70286ACD270003E946 /* FilterViewController.swift */,
+<<<<<<< HEAD
 				73846B3A286BF86B006C2F9E /* IssueCreateViewController.swift */,
+=======
+>>>>>>> 677093bb15c0b932a98c2d0c2237042f97c86bbf
 				73888534286836DB00F65BEF /* TableviewDataSource.swift */,
 			);
 			path = View;
@@ -667,7 +670,10 @@
 				E46C6A0928655B320074AEF9 /* MilestoneFlowDIContainer.swift in Sources */,
 				E46C69FD286557F20074AEF9 /* MilestoneFlowCoordinator.swift in Sources */,
 				73CF7C71286ACD270003E946 /* FilterViewController.swift in Sources */,
+<<<<<<< HEAD
 				73846B3B286BF86B006C2F9E /* IssueCreateViewController.swift in Sources */,
+=======
+>>>>>>> 677093bb15c0b932a98c2d0c2237042f97c86bbf
 				7388853A2868371200F65BEF /* TitleView.swift in Sources */,
 				E4CD5BA628644F9D00A9B1B8 /* TabBarFlowCoordinator.swift in Sources */,
 				E45477AD28655C94002379F1 /* TabBarFlowDIContainer.swift in Sources */,

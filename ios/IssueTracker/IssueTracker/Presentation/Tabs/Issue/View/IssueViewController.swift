@@ -120,4 +120,29 @@ extension IssueViewController: IssueViewDelegate {
         let nextViewController = IssueCreateViewController()
         navigationController?.pushViewController(nextViewController, animated: true)
     }
+
+    private func registerAction() {
+        leftButton.addAction(.init(handler: { [weak self] _ in
+            self?.delegate?.didClickFilterButton()
+        }), for: .touchUpInside)
+    }
+}
+
+extension IssueViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+
+    func scrollViewWillBeginDragging(_: UIScrollView) {
+        navigationItem.searchController = searchController
+    }
+}
+
+extension IssueViewController: IssueViewDelegate {
+    func didClickFilterButton() {
+        let netxtViewController = FilterViewController()
+        netxtViewController.modalPresentationStyle = UIModalPresentationStyle.automatic
+
+        present(netxtViewController, animated: true, completion: nil)
+    }
 }
