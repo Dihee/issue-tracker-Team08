@@ -12,6 +12,7 @@ import be.codesquad.issuetracker.milestone.service.MileStoneService;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -84,5 +85,27 @@ class MileStoneIntegrationTest {
             .then()
             .log().all()
             .statusCode(HttpStatus.OK.value());
+    }
+
+    @Test
+    void 마일스톤을_생성한다() {
+        Map<String, Object> content = Map.of(
+            "title", "첫번째 마이르스톤 생성",
+            "description", "마이르스톤 코멘트입니다."
+        );
+
+        given(documentationSpec)
+            .body(content)
+            .accept(MediaType.APPLICATION_JSON_VALUE)
+            .filter(document("get-mileStone-detail", preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint())))
+            .log().all()
+
+            .when()
+            .post("/api/milestones")
+
+            .then()
+            .log().all()
+            .statusCode(HttpStatus.CREATED.value());
     }
 }
