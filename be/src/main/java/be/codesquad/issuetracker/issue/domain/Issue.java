@@ -29,14 +29,28 @@ public class Issue {
     private Status status;
 
     @OneToMany(mappedBy = "issue")
-    private List<Label> label;
+    private List<Label> labels;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private MileStone mileStone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Assignee assignee;
+    @OneToMany(mappedBy = "issue")
+    private List<Assignee> assignees;
 
     private String subject;
     private String comment;
+
+    public Issue (
+        MileStone mileStone,
+        List<Label> labels,
+        List<Assignee> assignees,
+        String subject,
+        String comment) {
+        this.mileStone = mileStone;
+        this.labels = labels;
+        this.assignees = assignees;
+        this.subject = subject;
+        this.comment = comment;
+        this.status = Status.OPEN;
+    }
 }
