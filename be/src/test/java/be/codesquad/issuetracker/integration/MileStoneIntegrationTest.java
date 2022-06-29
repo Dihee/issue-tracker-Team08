@@ -7,13 +7,11 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
-import be.codesquad.issuetracker.issue.domain.Status;
 import be.codesquad.issuetracker.milestone.dto.MileStoneSaveRequest;
 import be.codesquad.issuetracker.milestone.service.MileStoneService;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
-import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -49,8 +47,10 @@ class MileStoneIntegrationTest {
 
     @BeforeEach
     void setData() {
+//        MileStoneSaveRequest request = new MileStoneSaveRequest("첫번째 테스트용 마일스톤",
+//            "본문입니다", LocalDate.of(2022, 06, 29), Status.OPEN);
         MileStoneSaveRequest request = new MileStoneSaveRequest("첫번째 테스트용 마일스톤",
-            "본문입니다", LocalDate.of(2022, 06, 29), Status.OPEN);
+            "본문입니다", null, null);
         mileStoneService.save(request);
     }
 
@@ -64,6 +64,22 @@ class MileStoneIntegrationTest {
 
             .when()
             .get("/api/milestones?status=open")
+
+            .then()
+            .log().all()
+            .statusCode(HttpStatus.OK.value());
+    }
+
+    @Test
+    void 특정_마일스톤을_조회한다() {
+        given(documentationSpec)
+            .accept(MediaType.APPLICATION_JSON_VALUE)
+            .filter(document("get-mileStone-detail", preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint())))
+            .log().all()
+
+            .when()
+            .get("/api/milestones/1")
 
             .then()
             .log().all()

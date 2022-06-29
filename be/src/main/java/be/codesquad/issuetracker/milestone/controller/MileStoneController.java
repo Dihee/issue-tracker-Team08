@@ -1,11 +1,13 @@
 package be.codesquad.issuetracker.milestone.controller;
 
 import be.codesquad.issuetracker.issue.domain.Status;
+import be.codesquad.issuetracker.milestone.dto.MileStoneDetailResponse;
 import be.codesquad.issuetracker.milestone.dto.MileStoneListResponse;
 import be.codesquad.issuetracker.milestone.service.MileStoneService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +23,10 @@ public class MileStoneController {
     public MileStoneListResponse getMileStones(String status) {
         log.debug("status: {}", status);
         return mileStoneService.findAll(Status.of(status));
+    }
+
+    @GetMapping("/{id}")
+    public MileStoneDetailResponse getMileStoneDetail(@PathVariable Long id) {
+        return mileStoneService.findById(id);
     }
 }
