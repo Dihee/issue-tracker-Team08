@@ -1,7 +1,7 @@
 package be.codesquad.issuetracker.milestone.dto;
 
 import be.codesquad.issuetracker.issue.domain.Status;
-import be.codesquad.issuetracker.milestone.domain.MileStone;
+import be.codesquad.issuetracker.milestone.domain.Milestone;
 import java.time.LocalDate;
 import lombok.Getter;
 
@@ -14,7 +14,7 @@ public class MileStoneDetailResponse {
     private final LocalDate dueDate;
     private final Status status;
 
-    public MileStoneDetailResponse(MileStone mileStone) {
+    public MileStoneDetailResponse(Milestone mileStone) {
         this.id = mileStone.getId();
         this.title = mileStone.getTitle();
         this.description = mileStone.getDescription();

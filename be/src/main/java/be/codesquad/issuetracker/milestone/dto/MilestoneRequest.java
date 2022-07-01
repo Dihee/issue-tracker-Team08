@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class MileStoneSaveRequest {
+public class MilestoneRequest {
 
     private String title;
     private String description;

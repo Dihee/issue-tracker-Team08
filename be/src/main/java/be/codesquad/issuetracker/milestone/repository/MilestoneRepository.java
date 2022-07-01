@@ -1,11 +1,11 @@
 package be.codesquad.issuetracker.milestone.repository;
 
 import be.codesquad.issuetracker.issue.domain.Status;
-import be.codesquad.issuetracker.milestone.domain.MileStone;
+import be.codesquad.issuetracker.milestone.domain.Milestone;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MileStoneRepository extends JpaRepository<MileStone, Long> {
+public interface MilestoneRepository extends JpaRepository<Milestone, Long> {
 
-    List<MileStone> findAllByStatus(Status status);
+    List<Milestone> findAllByStatus(Status status);
 }

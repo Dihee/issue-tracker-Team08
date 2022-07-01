@@ -1,6 +1,6 @@
 package be.codesquad.issuetracker.milestone.dto;
 
-import be.codesquad.issuetracker.milestone.domain.MileStone;
+import be.codesquad.issuetracker.milestone.domain.Milestone;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,5 +9,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class MileStoneListResponse {
 
-    private List<MileStone> mileStones;
+    private List<Milestone> mileStones;
 }

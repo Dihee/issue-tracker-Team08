@@ -2,7 +2,7 @@ package be.codesquad.issuetracker.milestone.domain;
 
 import be.codesquad.issuetracker.issue.domain.Issue;
 import be.codesquad.issuetracker.issue.domain.Status;
-import be.codesquad.issuetracker.milestone.dto.MileStoneSaveRequest;
+import be.codesquad.issuetracker.milestone.dto.MilestoneRequest;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "milestone")
-public class MileStone {
+public class Milestone {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,10 +34,17 @@ public class MileStone {
     private String description;
     private LocalDate dueDate;
 
-    public MileStone(MileStoneSaveRequest mileStoneSaveRequest) {
+    public Milestone(MilestoneRequest mileStoneSaveRequest) {
         this.title = mileStoneSaveRequest.getTitle();
         this.description = mileStoneSaveRequest.getDescription();
         this.dueDate = mileStoneSaveRequest.getDueDate();
         this.status = Status.OPEN;
+    }
+
+    public void editMilestone(String title, String description, LocalDate dueDate, Status status) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.status = status;
     }
 }

@@ -7,7 +7,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
-import be.codesquad.issuetracker.milestone.dto.MileStoneSaveRequest;
+import be.codesquad.issuetracker.milestone.dto.MilestoneRequest;
 import be.codesquad.issuetracker.milestone.service.MileStoneService;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -46,7 +46,7 @@ class MileStoneIntegrationTest {
 
     @BeforeEach
     void setData() {
-        MileStoneSaveRequest request = new MileStoneSaveRequest("첫번째 테스트용 마일스톤",
+        MilestoneRequest request = new MilestoneRequest("첫번째 테스트용 마일스톤",
             "본문입니다", null, null);
         mileStoneService.save(request);
     }
