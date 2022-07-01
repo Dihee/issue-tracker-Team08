@@ -19,8 +19,7 @@ public class LabelService {
 
     @Transactional(readOnly = true)
     public LabelResponse findById(Long id) {
-        Label findLabel = labelRepository.findById(id)
-            .orElseThrow(NoSuchElementException::new);
+        Label findLabel = findByIdOrThrow(id);
         return new LabelResponse(findLabel);
     }
 
@@ -37,4 +36,16 @@ public class LabelService {
             .map(LabelResponse::new)
             .collect(Collectors.toList());
     }
+
+    @Transactional
+    public void delete(Long id) {
+        Label findLabel = findByIdOrThrow(id);
+        labelRepository.delete(findLabel);
+    }
+
+    private Label findByIdOrThrow(Long id) {
+        return labelRepository.findById(id)
+            .orElseThrow(NoSuchElementException::new);
+    }
+
 }

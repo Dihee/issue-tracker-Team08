@@ -6,6 +6,7 @@ import be.codesquad.issuetracker.label.service.LabelService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,5 +35,10 @@ public class LabelController {
     @GetMapping("/{id}")
     public LabelResponse getLabel(@PathVariable Long id) {
         return labelService.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteLabel(@PathVariable Long id) {
+        labelService.delete(id);
     }
 }
