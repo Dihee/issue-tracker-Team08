@@ -35,10 +35,4 @@ public class LabelController {
     public LabelResponse getLabel(@PathVariable Long id) {
         return labelService.findById(id);
     }
-
-    @PostMapping
-    public Long save(LabelSaveRequest dto) {
-        return labelService.save(dto);
-    }
-
 }
