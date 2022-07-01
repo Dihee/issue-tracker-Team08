@@ -6,14 +6,14 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class LabelDetailResponse {
+public class LabelResponse {
 
     private Long id;
     private String title;
     private String description;
     private String color;
 
-    public LabelDetailResponse(Label label) {
+    public LabelResponse(Label label) {
         this.id = label.getId();
         this.title = label.getTitle();
         this.description = label.getDescription();

@@ -1,6 +1,7 @@
 package be.codesquad.issuetracker.integration;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
@@ -9,7 +10,6 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 
 import be.codesquad.issuetracker.label.dto.LabelSaveRequest;
 import be.codesquad.issuetracker.label.service.LabelService;
-import groovy.util.logging.Slf4j;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
@@ -24,7 +24,6 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 
-@Slf4j
 @ExtendWith(RestDocumentationExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class LabelIntegrationTest {
@@ -69,5 +68,24 @@ class LabelIntegrationTest {
             .then()
             .log().all()
             .statusCode(HttpStatus.OK.value());
+    }
+
+    @Test
+    void 모든_라벨을_조회한다() {
+        given(documentationSpec)
+            .accept(MediaType.APPLICATION_JSON_VALUE)
+            .filter(document("get-issues", preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint())))
+            .log().all()
+
+            .when()
+
+            .get("/api/labels")
+
+            .then()
+            .log().all()
+            .statusCode(HttpStatus.OK.value())
+            .body("labels", hasSize(1));
+
     }
 }
