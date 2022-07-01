@@ -55,7 +55,7 @@ class LabelIntegrationTest {
     void 특정_라벨을_조회한다() {
         given(documentationSpec)
             .accept(MediaType.APPLICATION_JSON_VALUE)
-            .filter(document("get-issues", preprocessRequest(prettyPrint()),
+            .filter(document("get-label-detail", preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
             .log().all()
 
@@ -72,7 +72,7 @@ class LabelIntegrationTest {
     void 모든_라벨을_조회한다() {
         given(documentationSpec)
             .accept(MediaType.APPLICATION_JSON_VALUE)
-            .filter(document("get-issues", preprocessRequest(prettyPrint()),
+            .filter(document("get-labels", preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
             .log().all()
 
@@ -98,7 +98,7 @@ class LabelIntegrationTest {
         given(documentationSpec)
             .body(content)
             .accept(MediaType.APPLICATION_JSON_VALUE)
-            .filter(document("get-issues", preprocessRequest(prettyPrint()),
+            .filter(document("create-issues", preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
             .log().all()
 

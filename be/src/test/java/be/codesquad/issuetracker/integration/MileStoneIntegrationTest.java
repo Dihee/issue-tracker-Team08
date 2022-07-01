@@ -94,7 +94,7 @@ class MileStoneIntegrationTest {
         given(documentationSpec)
             .body(content)
             .accept(MediaType.APPLICATION_JSON_VALUE)
-            .filter(document("get-mileStone-detail", preprocessRequest(prettyPrint()),
+            .filter(document("create-mileStone", preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
             .log().all()
 
