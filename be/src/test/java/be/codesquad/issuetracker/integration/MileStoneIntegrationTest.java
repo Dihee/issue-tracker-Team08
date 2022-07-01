@@ -23,11 +23,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.transaction.annotation.Transactional;
 
 @ExtendWith(RestDocumentationExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Transactional
 class MileStoneIntegrationTest {
 
     @Autowired
@@ -69,6 +67,7 @@ class MileStoneIntegrationTest {
             .then()
             .log().all()
             .statusCode(HttpStatus.OK.value());
+
     }
 
     @Test
