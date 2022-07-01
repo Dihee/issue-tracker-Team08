@@ -5,10 +5,12 @@ import be.codesquad.issuetracker.label.dto.LabelSaveRequest;
 import be.codesquad.issuetracker.label.service.LabelService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,6 +23,12 @@ public class LabelController {
     @GetMapping
     public List<LabelResponse> getLabels() {
         return labelService.findAll();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createLabel(LabelSaveRequest labelSaveRequest) {
+        labelService.save(labelSaveRequest);
     }
 
     @GetMapping("/{id}")

@@ -13,6 +13,7 @@ import be.codesquad.issuetracker.label.service.LabelService;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +32,6 @@ class LabelIntegrationTest {
     @Autowired
     LabelService labelService;
 
-
     @LocalServerPort
     int port;
 
@@ -47,8 +47,6 @@ class LabelIntegrationTest {
 
     @BeforeEach
     void setData() {
-        // 테스트를 위한 라벨 데이터 추가
-        Long id = 1L;
         labelService.save(new LabelSaveRequest("첫번째 라벨 테스트", "본문 내용", "#color"));
     }
 
@@ -86,6 +84,31 @@ class LabelIntegrationTest {
             .log().all()
             .statusCode(HttpStatus.OK.value())
             .body("labels", hasSize(1));
+
+    }
+
+    @Test
+    void 라벨을_생성한다() {
+        Map<String, Object> content = Map.of(
+            "title", "첫번째 라벨 생성",
+            "description", "테스트 라벨 내용입니다.",
+            "color", "#color"
+        );
+
+        given(documentationSpec)
+            .body(content)
+            .accept(MediaType.APPLICATION_JSON_VALUE)
+            .filter(document("get-issues", preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint())))
+            .log().all()
+
+            .when()
+
+            .post("/api/labels")
+
+            .then()
+            .log().all()
+            .statusCode(HttpStatus.CREATED.value());
 
     }
 }
