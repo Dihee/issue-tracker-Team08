@@ -7,12 +7,12 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
-import be.codesquad.issuetracker.milestone.dto.MileStoneSaveRequest;
-import be.codesquad.issuetracker.milestone.service.MileStoneService;
+import be.codesquad.issuetracker.label.dto.LabelSaveRequest;
+import be.codesquad.issuetracker.label.service.LabelService;
+import groovy.util.logging.Slf4j;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
-import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,12 +24,14 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 
+@Slf4j
 @ExtendWith(RestDocumentationExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class MileStoneIntegrationTest {
+class LabelIntegrationTest {
 
     @Autowired
-    private MileStoneService mileStoneService;
+    LabelService labelService;
+
 
     @LocalServerPort
     int port;
@@ -46,65 +48,26 @@ class MileStoneIntegrationTest {
 
     @BeforeEach
     void setData() {
-//        MileStoneSaveRequest request = new MileStoneSaveRequest("첫번째 테스트용 마일스톤",
-//            "본문입니다", LocalDate.of(2022, 06, 29), Status.OPEN);
-        MileStoneSaveRequest request = new MileStoneSaveRequest("첫번째 테스트용 마일스톤",
-            "본문입니다", null, null);
-        mileStoneService.save(request);
+        // 테스트를 위한 라벨 데이터 추가
+        Long id = 1L;
+        labelService.save(new LabelSaveRequest("첫번째 라벨 테스트", "본문 내용", "#color"));
     }
 
+
     @Test
-    void 모든_마일스톤을_조회한다() {
+    void 특정_라벨을_조회한다() {
         given(documentationSpec)
             .accept(MediaType.APPLICATION_JSON_VALUE)
-            .filter(document("get-mileStones", preprocessRequest(prettyPrint()),
+            .filter(document("get-issues", preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
             .log().all()
 
             .when()
-            .get("/api/milestones?status=open")
+
+            .get("/api/labels/1")
 
             .then()
             .log().all()
             .statusCode(HttpStatus.OK.value());
-
-    }
-
-    @Test
-    void 특정_마일스톤을_조회한다() {
-        given(documentationSpec)
-            .accept(MediaType.APPLICATION_JSON_VALUE)
-            .filter(document("get-mileStone-detail", preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint())))
-            .log().all()
-
-            .when()
-            .get("/api/milestones/1")
-
-            .then()
-            .log().all()
-            .statusCode(HttpStatus.OK.value());
-    }
-
-    @Test
-    void 마일스톤을_생성한다() {
-        Map<String, Object> content = Map.of(
-            "title", "첫번째 마이르스톤 생성",
-            "description", "마이르스톤 코멘트입니다."
-        );
-
-        given(documentationSpec)
-            .body(content)
-            .accept(MediaType.APPLICATION_JSON_VALUE)
-            .filter(document("get-mileStone-detail", preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint())))
-            .log().all()
-
-            .when()
-            .post("/api/milestones")
-
-            .then()
-            .log().all()
-            .statusCode(HttpStatus.CREATED.value());
     }
 }
