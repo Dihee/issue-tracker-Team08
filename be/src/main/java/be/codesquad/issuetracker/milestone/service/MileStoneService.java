@@ -26,8 +26,7 @@ public class MileStoneService {
 
     @Transactional(readOnly = true)
     public MileStoneDetailResponse findById(Long id) {
-        MileStone findMileStone = mileStoneRepository.findById(id)
-            .orElseThrow(NoSuchElementException::new);
+        MileStone findMileStone = findByIdOrThrow(id);
         return new MileStoneDetailResponse(findMileStone);
     }
 
@@ -35,5 +34,15 @@ public class MileStoneService {
     public void save(MileStoneSaveRequest mileStoneSaveRequest) {
         MileStone mileStone = new MileStone(mileStoneSaveRequest);
         mileStoneRepository.save(mileStone);
+    }
+
+    public void delete(Long id) {
+        MileStone findMilestone = findByIdOrThrow(id);
+        mileStoneRepository.delete(findMilestone);
+    }
+
+    private MileStone findByIdOrThrow(Long id) {
+        return mileStoneRepository.findById(id)
+            .orElseThrow(NoSuchElementException::new);
     }
 }
