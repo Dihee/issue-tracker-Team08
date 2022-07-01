@@ -1,11 +1,28 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/issuetracker
-    username: donggi
-    password: '0614'
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+
+  mvc:
+    servlet:
+      path: /api
   profiles:
     active: ${profile}
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
+
 
 oauth:
   github:
@@ -14,3 +31,7 @@ oauth:
     auth-path: https://github.com/login/oauth/access_token
     resource-path: https://api.github.com/user
     redirect-uri: https://github.com/login/oauth/authorize
+
+logging:
+  level:
+    org.hibernate.SQL: debug
