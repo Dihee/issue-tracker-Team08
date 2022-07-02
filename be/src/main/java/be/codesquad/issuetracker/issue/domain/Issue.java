@@ -2,7 +2,7 @@ package be.codesquad.issuetracker.issue.domain;
 
 import be.codesquad.issuetracker.assignee.domain.Assignee;
 import be.codesquad.issuetracker.label.domain.Label;
-import be.codesquad.issuetracker.milestone.domain.MileStone;
+import be.codesquad.issuetracker.milestone.domain.Milestone;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -32,7 +32,7 @@ public class Issue {
     private List<Label> labels;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private MileStone mileStone;
+    private Milestone mileStone;
 
     @OneToMany(mappedBy = "issue")
     private List<Assignee> assignees;
@@ -41,12 +41,12 @@ public class Issue {
     private String comment;
 
     public Issue (
-        MileStone mileStone,
+        Milestone milestone,
         List<Label> labels,
         List<Assignee> assignees,
         String subject,
         String comment) {
-        this.mileStone = mileStone;
+        this.mileStone = milestone;
         this.labels = labels;
         this.assignees = assignees;
         this.subject = subject;
