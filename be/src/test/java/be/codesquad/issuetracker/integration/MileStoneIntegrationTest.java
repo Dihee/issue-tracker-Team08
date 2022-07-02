@@ -1,17 +1,21 @@
 package be.codesquad.issuetracker.integration;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
+import be.codesquad.issuetracker.issue.domain.Status;
 import be.codesquad.issuetracker.milestone.dto.MilestoneRequest;
 import be.codesquad.issuetracker.milestone.service.MileStoneService;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
+import java.time.LocalDate;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,7 +51,7 @@ class MileStoneIntegrationTest {
     @BeforeEach
     void setData() {
         MilestoneRequest request = new MilestoneRequest("첫번째 테스트용 마일스톤",
-            "본문입니다", null, null);
+            "본문입니다", LocalDate.of(2022, 07, 02), Status.OPEN);
         mileStoneService.save(request);
     }
 
@@ -64,7 +68,9 @@ class MileStoneIntegrationTest {
 
             .then()
             .log().all()
-            .statusCode(HttpStatus.OK.value());
+            .statusCode(HttpStatus.OK.value())
+            .assertThat()
+            .body("mileStones", hasSize(1));
 
     }
 
@@ -81,7 +87,13 @@ class MileStoneIntegrationTest {
 
             .then()
             .log().all()
-            .statusCode(HttpStatus.OK.value());
+            .statusCode(HttpStatus.OK.value())
+            .assertThat()
+            .body("id", equalTo(1))
+            .body("title", equalTo("첫번째 테스트용 마일스톤"))
+            .body("description", equalTo("본문입니다"))
+            .body("status", equalTo("OPEN"))
+            .body("dueDate", equalTo("2022-07-02"));
     }
 
     @Test
