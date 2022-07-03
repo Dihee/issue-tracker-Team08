@@ -7,13 +7,7 @@
 
 import UIKit
 
-protocol View {
-    associatedtype ViewModel
-
-    static func create(with viewModel: ViewModel) -> UIViewController
-}
-
-final class LoginViewController: UIViewController, View {
+final class LoginViewController: UIViewController, ViewModelAdaptable {
     static func create(with viewModel: LoginViewModel) -> UIViewController {
         let viewController = LoginViewController()
         viewController.viewModel = viewModel
