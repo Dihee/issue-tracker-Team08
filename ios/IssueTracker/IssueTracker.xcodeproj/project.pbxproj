@@ -55,6 +55,7 @@
 		E4D8739F2858861000AFCE4D /* .swiftformat in Resources */ = {isa = PBXBuildFile; fileRef = E4D8739E2858861000AFCE4D /* .swiftformat */; };
 		E4F44CEE285C26C900D3A3E6 /* LoginFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F44CED285C26C900D3A3E6 /* LoginFlowDIContainer.swift */; };
 		E4F44CF0285C292E00D3A3E6 /* AppFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F44CEF285C292E00D3A3E6 /* AppFlowDIContainer.swift */; };
+		E4FF65F7286D423A00B3DE57 /* LabelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF65F6286D423A00B3DE57 /* LabelRepository.swift */; };
 		E4FF65F9286D500E00B3DE57 /* ViewModelAdaptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF65F8286D500E00B3DE57 /* ViewModelAdaptable.swift */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +114,7 @@
 		E4D8739E2858861000AFCE4D /* .swiftformat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
 		E4F44CED285C26C900D3A3E6 /* LoginFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowDIContainer.swift; sourceTree = "<group>"; };
 		E4F44CEF285C292E00D3A3E6 /* AppFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowDIContainer.swift; sourceTree = "<group>"; };
+		E4FF65F6286D423A00B3DE57 /* LabelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelRepository.swift; sourceTree = "<group>"; };
 		E4FF65F8286D500E00B3DE57 /* ViewModelAdaptable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelAdaptable.swift; sourceTree = "<group>"; };
 		FF7E055DCBFAC002F724EBA1 /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				736E6BA82864093100BB3490 /* AuthRepository.swift */,
+				E4FF65F6286D423A00B3DE57 /* LabelRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				73846B3B286BF86B006C2F9E /* IssueCreateViewController.swift in Sources */,
 				7388853A2868371200F65BEF /* TitleView.swift in Sources */,
 				E4FF65F9286D500E00B3DE57 /* ViewModelAdaptable.swift in Sources */,
+				E4FF65F7286D423A00B3DE57 /* LabelRepository.swift in Sources */,
 				E4CD5BA628644F9D00A9B1B8 /* TabBarFlowCoordinator.swift in Sources */,
 				E4805380286BF53700090B8C /* TextButton.swift in Sources */,
 				E45477AD28655C94002379F1 /* TabBarFlowDIContainer.swift in Sources */,
