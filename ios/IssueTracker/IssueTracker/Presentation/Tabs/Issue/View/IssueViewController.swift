@@ -20,7 +20,8 @@ class IssueViewController: UIViewController {
 
     private let leftButton: TextButton = {
         let button = TextButton()
-        button.setSymbol(UIImage.filter)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 14)
+        button.setSymbol(UIImage(systemName: "checkmark.circle", withConfiguration: symbolConfiguration))
         button.setTitle("필터", for: .normal)
         button.setTitleColor(UIColor.primary, for: .normal)
         return button
@@ -32,6 +33,12 @@ class IssueViewController: UIViewController {
         button.setSymbol(UIImage(systemName: "checkmark.circle", withConfiguration: symbolConfiguration), on: .trailing)
         button.setTitle("선택", for: .normal)
         return button
+    }()
+
+    private let backButton: UIBarButtonItem = {
+        let buttonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: nil, action: nil)
+        buttonItem.tintColor = .black
+        return buttonItem
     }()
 
     private let issueCreateButton: UIButton = {
@@ -63,6 +70,7 @@ class IssueViewController: UIViewController {
         navigationItem.title = "이슈"
         navigationItem.leftBarButtonItem = .init(customView: leftButton)
         navigationItem.rightBarButtonItem = .init(customView: rightButton)
+        navigationItem.backBarButtonItem = backButton
         navigationController?.navigationBar.prefersLargeTitles = true
 
         delegate = self
