@@ -53,6 +53,7 @@
 		E4D8738E285884AF00AFCE4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4D8738C285884AF00AFCE4D /* LaunchScreen.storyboard */; };
 		E4D873992858854D00AFCE4D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = E4D873982858854C00AFCE4D /* .swiftlint.yml */; };
 		E4D8739F2858861000AFCE4D /* .swiftformat in Resources */ = {isa = PBXBuildFile; fileRef = E4D8739E2858861000AFCE4D /* .swiftformat */; };
+		E4D8B12B286C57C8007F5278 /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D8B12A286C57C8007F5278 /* LabelViewModel.swift */; };
 		E4F44CEE285C26C900D3A3E6 /* LoginFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F44CED285C26C900D3A3E6 /* LoginFlowDIContainer.swift */; };
 		E4F44CF0285C292E00D3A3E6 /* AppFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F44CEF285C292E00D3A3E6 /* AppFlowDIContainer.swift */; };
 		E4FF65F7286D423A00B3DE57 /* LabelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF65F6286D423A00B3DE57 /* LabelRepository.swift */; };
@@ -112,6 +113,7 @@
 		E4D8738F285884AF00AFCE4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4D873982858854C00AFCE4D /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		E4D8739E2858861000AFCE4D /* .swiftformat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
+		E4D8B12A286C57C8007F5278 /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
 		E4F44CED285C26C900D3A3E6 /* LoginFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowDIContainer.swift; sourceTree = "<group>"; };
 		E4F44CEF285C292E00D3A3E6 /* AppFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowDIContainer.swift; sourceTree = "<group>"; };
 		E4FF65F6286D423A00B3DE57 /* LabelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelRepository.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 		E46C69E4286555940074AEF9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E4D8B12A286C57C8007F5278 /* LabelViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -655,6 +658,7 @@
 				73A7EDC92859A68800191F99 /* LoginView.swift in Sources */,
 				E4805382286BFCBB00090B8C /* LabelCell.swift in Sources */,
 				73888537286836DB00F65BEF /* TableviewDataSource.swift in Sources */,
+				E4D8B12B286C57C8007F5278 /* LabelViewModel.swift in Sources */,
 				E46C69F92865568C0074AEF9 /* LabelFlowCoordinator.swift in Sources */,
 				E46FBE862862F8E2000CB998 /* Coordinator.swift in Sources */,
 				E46C6A0B28655B760074AEF9 /* AccountFlowDIContainer.swift in Sources */,

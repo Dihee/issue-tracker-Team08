@@ -7,26 +7,50 @@
 
 import UIKit
 
-final class LabelViewController: UIViewController {
+final class LabelViewController: UIViewController, ViewModelAdaptable {
+    static func create(with viewModel: LabelViewModel) -> UIViewController {
+        let viewController = LabelViewController()
+        viewController.viewModel = viewModel
+        return viewController
+    }
+
     private lazy var addButton: UIButton = {
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 14)
-        let image = UIImage(systemName: "plus", withConfiguration: symbolConfiguration)
+        let symbol = UIImage(systemName: "plus", withConfiguration: symbolConfiguration)
         let button = TextButton()
 
         button.setTitle("추가", for: .normal)
-        button.setSymbol(image, on: .trailing)
-        button.addAction(.init(handler: self.showLabelAdditionModal), for: .touchUpInside)
+        button.setSymbol(symbol, on: .trailing)
+        button.addAction(.init(handler: self.showNextScene), for: .touchUpInside)
 
         return button
     }()
 
     private let tableView = UITableView()
 
+    private var viewModel: LabelViewModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        bind()
     }
 
+    deinit {
+        print("Deinit: \(#fileID)")
+    }
+
+    private func bind() {
+        guard let viewModel = viewModel else {
+            return
+        }
+
+        viewModel.output.labels.bind(to: self) { [weak self] _ in
+            self?.tableView.reloadData()
+        }
+    }
+
+    // MARK: - UI Configuration
     private func configureUI() {
         view.backgroundColor = .systemBackground
         configureNavigationBar()
@@ -54,16 +78,12 @@ final class LabelViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(LabelCell.self, forCellReuseIdentifier: LabelCell.reuseIdentifier)
     }
-
-    deinit {
-        print("Deinit: \(#fileID)")
-    }
 }
 
 // MARK: - Table view data source
 extension LabelViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        12
+        viewModel?.output.count ?? 20
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt _: IndexPath) -> UITableViewCell {
@@ -80,7 +100,7 @@ extension LabelViewController: UITableViewDataSource {
 
 // MARK: - Action handlers
 extension LabelViewController {
-    func showLabelAdditionModal(_: UIAction) {
-        // TODO: Show new view controller modally from view model
+    func showNextScene(_: UIAction) {
+        viewModel?.action.showNextScene()
     }
 }
